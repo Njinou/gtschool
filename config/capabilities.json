@@ -1,0 +1,7 @@
+{
+    "platformName": "Android",
+    "deviceName": "emulator-5554",
+    "appPackage": "",
+    "appActivity": ".MainActivity",
+    "automationName": "UiAutomator2"
+}
