@@ -5,9 +5,13 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from typing import Tuple, Any
-from src.utils.retry import retry
 
-def click_button(driver: WebDriver, by: By, value: str, timeout: int = 10):
+# Assuming the retry function is within src/utils/retry.py
+from utils.retry import retry
+
+import logging 
+
+def click_button(driver: WebDriver, by: By, value: str, timeout: int = 20):
     """Waits for an element to be clickable and clicks it."""
     def action():
         element = WebDriverWait(driver, timeout).until(
@@ -18,7 +22,7 @@ def click_button(driver: WebDriver, by: By, value: str, timeout: int = 10):
     
     retry(action)
 
-def send_text(driver: WebDriver, by: By, value: str, keys: str, timeout: int = 10):
+def send_text(driver: WebDriver, by: By, value: str, keys: str, timeout: int = 20):
     """Waits for an element to be clickable and sends keys to it."""
     def action():
         element = WebDriverWait(driver, timeout).until(
@@ -43,31 +47,28 @@ def enter_text(driver: WebDriver, selector: Tuple[By, str], text: str, timeout: 
 
 def wait_for_toast_message(driver: WebDriver, selector: Tuple[By, str], timeout: int = 10) -> bool:
     """Waits for a toast message to appear."""
-    def action():
+    #def action():
+    try:
         WebDriverWait(driver, timeout).until(
             EC.presence_of_element_located(selector)
         )
         logging.info(f"Toast message with selector {selector} found")
-        return True
-    
-    try:
-        return retry(action)
+        return True 
+
+        print("None",selector)
+        #return retry(action)
     except TimeoutException:
         logging.warning(f"No toast message with selector {selector} found within the given time")
         return False
 
-def navigate_back(driver: WebDriver, timeout: int = 10) -> bool:
+def navigate_back(driver: WebDriver, timeout: int = 10) -> any:
     """Navigates back using the Android back button."""
-    def action():
-        WebDriverWait(driver, timeout).until(
-            EC.presence_of_element_located(('new UiSelector().className("com.horcrux.svg.PathView")'))
-        )
+    #def action():
+    try:
         driver.back()
         logging.info("Back button pressed successfully")
         return True
-
-    try:
-        return retry(action)
+        #return retry(action)
     except TimeoutException:
         logging.warning("Back button element not found within the given time")
         return False
