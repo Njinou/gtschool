@@ -5,7 +5,8 @@ import os
 from dotenv import load_dotenv
 import logging
 from typing import Optional
-
+import time 
+# Load environment variables from .env file
 load_dotenv()
 
 class DriverManager:
@@ -15,7 +16,10 @@ class DriverManager:
     def initialize_driver(self) -> webdriver.Remote:
         """Initializes the Appium WebDriver."""
         try:
-            with open('config/capabilities.json') as f:
+            base_dir = os.path.abspath(os.path.dirname(__file__))
+            config_path = os.path.join(base_dir, '../../config/capabilities.json')
+            
+            with open(config_path) as f:
                 capabilities = json.load(f)
 
             capabilities['appPackage'] = os.getenv('APP_PACKAGE')
@@ -39,4 +43,5 @@ class DriverManager:
         if self.driver:
             self.driver.quit()
             self.driver = None
+            time.sleep(10)
             logging.info("WebDriver quit successfully")
