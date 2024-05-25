@@ -12,3 +12,4 @@ SIGNUP_VIEW_GROUP = 'new UiSelector().className("android.view.ViewGroup").instan
 FINALIZE_SIGNUP_VIEW_GROUP = 'new UiSelector().className("android.view.ViewGroup").instance(46)'
 BACK_BUTTON_PATH_VIEW = 'new UiSelector().className("com.horcrux.svg.PathView")'
 FINALIZE_LOGIN_VIEW_GROUP = 'new UiSelector().className("android.view.ViewGroup").instance(50)'
+ERROR = 'new UiSelector().text("Something went wrong")'
