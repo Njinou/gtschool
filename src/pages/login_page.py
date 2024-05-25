@@ -34,6 +34,8 @@ class LoginPage(BasePage):
 
             if  wait_for_toast_message(self.driver, (AppiumBy.ANDROID_UIAUTOMATOR, WRONG_EMAIL_OR_PASSWORD_TOAST)):
                 logging.warning("Verify either the email or the password or sign up.")
+            elif wait_for_toast_message(self.driver, (AppiumBy.ANDROID_UIAUTOMATOR, ERROR)): 
+                print("error Logging in  went totally wrong despite credentials being well vetted !!! bug !!!!!!!!!!!!!!")
             else:
                 logging.info("Log In successful!")
                 time.sleep(30)
