@@ -7,6 +7,7 @@ from unittest.mock import patch, MagicMock
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 from drivers.driver import DriverManager
+from utils.helpers import close_app, reopen_app
 
 @pytest.fixture
 def driver_manager():
@@ -62,3 +63,19 @@ def test_quit_driver(driver_manager):
 
     mock_driver.quit.assert_called_once()
     assert driver_manager.driver is None
+
+def test_close_and_reopen_app(driver):
+    app_package = 'com.gtschoolapp'
+    app_activity = '.MainActivity'
+    
+    # Close the app
+    close_app(driver)
+    
+    # Reopen the app
+    reopen_app(driver, app_package, app_activity)
+    
+    # Perform an assertion or verification after reopening the app
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Welcome")'))
+    )
+    assert element is not None
