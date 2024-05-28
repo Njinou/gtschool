@@ -6,10 +6,21 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from typing import Tuple, Any
 
+from typing import Optional
+import time 
+
 # Assuming the retry function is within src/utils/retry.py
 from utils.retry import retry
 
 import logging 
+import json
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 
 def click_button(driver: WebDriver, by: By, value: str, timeout: int = 20):
     """Waits for an element to be clickable and clicks it."""
@@ -72,3 +83,24 @@ def navigate_back(driver: WebDriver, timeout: int = 10) -> any:
     except TimeoutException:
         logging.warning("Back button element not found within the given time")
         return False
+
+def getActivity () -> any:
+    try:
+        activity = os.getenv('APP_ACTIVITY')
+        return activity
+    except Exception as e:
+        return "error" 
+
+
+
+def close_app(driver: WebDriver): #def close_app(driver: WebDriver, app_package: str):
+    """Closes the app."""
+    app_package = 'com.gtschoolapp'
+    logging.info("Closing the app")
+    driver.terminate_app(app_package)
+
+def reopen_app(driver: WebDriver): #def reopen_app(driver: WebDriver, app_package: str):
+    """Reopens the app."""
+    app_package = 'com.gtschoolapp'
+    logging.info("Reopening the app")
+    driver.activate_app(app_package)
