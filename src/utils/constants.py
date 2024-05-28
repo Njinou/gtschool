@@ -13,3 +13,6 @@ FINALIZE_SIGNUP_VIEW_GROUP = 'new UiSelector().className("android.view.ViewGroup
 BACK_BUTTON_PATH_VIEW = 'new UiSelector().className("com.horcrux.svg.PathView")'
 FINALIZE_LOGIN_VIEW_GROUP = 'new UiSelector().className("android.view.ViewGroup").instance(50)'
 ERROR = 'new UiSelector().text("Something went wrong")'
+NAVIGATE_EXPLORE = 'new UiSelector().className("android.view.View").instance(3)'
+DISPLAY_HIGH_SCHOOL_COURSES = 'new UiSelector().text("High School Physics")'
+PLAY_HIGH_SCHOOL_COURSES = 'new UiSelector().className("com.horcrux.svg.PathView").instance(0)'
