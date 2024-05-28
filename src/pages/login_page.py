@@ -38,7 +38,7 @@ class LoginPage(BasePage):
                 print("error Logging in  went totally wrong despite credentials being well vetted !!! bug !!!!!!!!!!!!!!")
             else:
                 logging.info("Log In successful!")
-                time.sleep(30)
+                time.sleep(5)
         except Exception as e:
             logging.error(f"Error logging in: {e}")
 
@@ -60,7 +60,7 @@ class LoginPage(BasePage):
                 error_auth = wait_for_toast_message(self.driver, (AppiumBy.ANDROID_UIAUTOMATOR, ERROR))
                 if error_auth:
                     print("error signing up !!! bug !!!!!!!!!!!!!!")
-                time.sleep(30)
+                time.sleep(5)
             else:
                 Loggin_in_exist = wait_for_toast_message(self.driver, (AppiumBy.ANDROID_UIAUTOMATOR, LOG_IN_BUTTON))
                 while not Loggin_in_exist:
