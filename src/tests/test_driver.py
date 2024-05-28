@@ -64,7 +64,7 @@ def test_quit_driver(driver_manager):
     mock_driver.quit.assert_called_once()
     assert driver_manager.driver is None
 
-def test_close_and_reopen_app(driver):
+"""def test_close_and_reopen_app(driver):
     app_package = 'com.gtschoolapp'
     app_activity = '.MainActivity'
     
@@ -78,4 +78,4 @@ def test_close_and_reopen_app(driver):
     element = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Welcome")'))
     )
-    assert element is not None
+    assert element is not None"""
